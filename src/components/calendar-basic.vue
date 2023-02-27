@@ -1,8 +1,10 @@
 <template>
-    <VueDatePicker v-model="date" locale="zh-tw" :enable-time-picker="false" :disabled-dates="disabledDates"
+    <div class="calendarbooking">
+        <VueDatePicker v-model="date" locale="zh-tw" :enable-time-picker="false" :disabled-dates="disabledDates"
         :disabled-week-days="weekDay" :min-date="minDate" :max-date="maxDate" hide-offset-dates inline auto-apply
         prevent-min-max-navigation required />
-    <input type = "hidden" name = "bookingDate" :value = "currentDate"/>
+        <input type = "text" id ="bookingDate" name = "bookingDate" :value = "currentDate" required />
+    </div>
     <div class="right-col">
         <div class="optTIME right-col-row">
             <h4>選擇時間</h4>
@@ -34,7 +36,6 @@
 </template>
 
 <script>
-import { ref } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
@@ -78,10 +79,11 @@ export default {
                 return sum += person.price * person.counter;
             }, 0);
         },currentDate() {
-            const bookingTime = new Date(this.date);
-            return`${bookingTime.getFullYear()}-${bookingTime.getMonth()+1}-${bookingTime.getDate()}`;
+            if( this.date !== null ) {
+                const bookingTime = new Date(this.date);
+                return`${bookingTime.getFullYear()}-${bookingTime.getMonth()+1}-${bookingTime.getDate()}`;
+            }
         },
     },
 }
-const date = ref();
 </script>
