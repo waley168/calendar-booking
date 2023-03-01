@@ -22,11 +22,17 @@ export default {
           weekDay: [      //禁用星期三
             3
           ],
-          disabledDates:[ //禁用日期
-            '2023-02-28',
-            '2023-02-27'
-          ],
         };
+      },
+      computed: {
+        disabledDates () {
+          const today = new Date();
+          const tomorrow = new Date(today)
+          tomorrow.setDate(tomorrow.getDate() + 1)
+          const afterTomorrow = new Date(tomorrow);
+          afterTomorrow.setDate(tomorrow.getDate() + 1);
+          return [tomorrow, afterTomorrow]
+        },
       },
   }
 </script>
