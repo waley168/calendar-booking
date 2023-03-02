@@ -33,7 +33,7 @@ export default {
           tomorrow.setDate(tomorrow.getDate() + 1)
           const afterTomorrow = new Date(tomorrow);
           afterTomorrow.setDate(tomorrow.getDate() + 1);
-          return [tomorrow, afterTomorrow]
+          return [today, tomorrow, afterTomorrow]
         },
       },
   }
