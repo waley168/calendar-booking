@@ -5,6 +5,11 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+#bookingDate{
+  opacity: 0;
+  width: 0;
+  pointer-events: none;
+}
 .dp__calendar_header_item {
   font-weight: 600;
 }

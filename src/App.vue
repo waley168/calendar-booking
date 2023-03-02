@@ -8,8 +8,6 @@ export default {
   components: { calendar },
   data() {
         return {
-          minDate: "2023-3-1",  //開始時間
-          maxDate: "2023-11-30", //終了時間
           peopleData:[
             { name: '成人(13歲以上)', price: 1400, value: 'adultCounter', counter: 1, atleast: 1 },
             { name: '兒童(4 - 12歲)', price: 1100, value: 'childrenCounter', counter: 0, atleast: 0 },
@@ -22,16 +20,27 @@ export default {
           weekDay: [      //禁用星期三
             3
           ],
+          disabledDates: [
+            
+          ],
         };
       },
       computed: {
-        disabledDates () {
+        minDate () {
           const today = new Date();
-          const tomorrow = new Date(today)
-          tomorrow.setDate(tomorrow.getDate() + 1)
-          const afterTomorrow = new Date(tomorrow);
-          afterTomorrow.setDate(tomorrow.getDate() + 1);
-          return [today, tomorrow, afterTomorrow]
+          const march1 = new Date(today.getFullYear(), 2, 1); // 2表示3月份，月份是0-based的
+            if (today < march1) {
+              // 如果今天日期在3月以前，返回今年的3/1
+              return march1;
+            } else {
+              // 如果今天日期在3月以後，返回今天的3天後的日期
+              const threeDaysLater = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 3);
+              return threeDaysLater;
+            }
+        },
+        maxDate () {
+          const november30 = new Date(new Date().getFullYear(), 10, 30);
+          return november30;
         },
       },
   }
